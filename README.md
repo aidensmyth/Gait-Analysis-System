@@ -12,6 +12,7 @@ Below is a link to our URECA abstract and poster:
 
 
 ![General Info](/ImagesFolder/General_Info.png)
+
 Above describes the significance of each axis of the BNO055 sensor
 
 ![Some Data](/ImagesFolder/Gait_image.JPG)
