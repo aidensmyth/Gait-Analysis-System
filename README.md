@@ -5,4 +5,4 @@ Stony Brook BME Senior Design
 
 ![General Info](/ImagesFolder/General_Info.png)
 
-![Some Data](/ImagesFolder/Gait_image.jpg)
+![Some Data](/ImagesFolder/Gait_image.JPG)
