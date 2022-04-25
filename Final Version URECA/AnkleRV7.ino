@@ -15,8 +15,11 @@ BLEDis  bledis;  // device information
 BLEUart bleuart; // uart over ble
 BLEBas  blebas;  // battery
 
-const byte buttonPin = 7;           
+const byte buttonPin = 7;
+int buttonNew;
+int buttonOld = 1;             
 const byte LEDPin = 3;                
+int LEDState = 0;                   
 
 //void displayCalStatus(void)
 //{
@@ -154,9 +157,35 @@ void startAdv(void)
   Bluefruit.Advertising.start(0);                // 0 = Don't stop advertising after n seconds  
 }
 
-void loop(){ 
-    OrientationData2();
-}
+void loop(){
+  on:
+   buttonNew = digitalRead(buttonPin);
+   if(buttonOld == 0 && buttonNew == 1){
+     while (LEDState == 0) {
+       digitalWrite(LEDPin, HIGH); 
+       OrientationData2();
+
+       buttonNew = digitalRead(buttonPin);
+       if (buttonNew == 0) {
+         LEDState = 1;
+        delay(10);
+        goto off;
+        }
+       }
+      }   
+  off:
+    delay(5000);
+    while( LEDState == 1) {
+      digitalWrite(LEDPin, LOW);
+      buttonNew = digitalRead(buttonPin);
+      if (buttonNew == 0) {
+        LEDState = 0;
+        goto on;
+     }
+    }
+    buttonOld = buttonNew;
+   }
+   
 // callback invoked when central connects
 void connect_callback(uint16_t conn_handle)
 {
